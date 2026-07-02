@@ -270,7 +270,7 @@ if submitted:
         <div style="font-size:14px;color:#4b5563;margin-bottom:20px;">{info["desc"]} your reported symptoms and vitals match patients typically direct to this department.</div>
         <div style="font-size:11px;font-weight:600;color:{info["color"]};text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">What to do next?</div>
         {steps_html}
-        <div style="margin-top:20px;padding12px 16px background:rgba(0,0,0,0.05); border-radius:10px;font-size:12px;color:#6b7280;line-height:1.5;">
+        <div style="margin-top:20px;padding12px 16px background:rgba(0,0,0,0.05); border-radius:10px;font-size:12px;color:#000000;line-height:1.5;">
         ⚠️This is an AI Suggestion, not a medical diagnosis, Please consult a doctor for further evaluation.
         </div>
     </div>
