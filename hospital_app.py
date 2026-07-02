@@ -214,7 +214,7 @@ with st.form("triage_form"):
 
 #when the form is submitted
 if submitted:
-  patient = pd,DataFrame([{
+  patient = pd.DataFrame([{
     'age'              :age,
     'gender'           :gender_map.get(gender,0),
     'fever'            :int(fever),
