@@ -200,7 +200,7 @@ with st.form("triage_form"):
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
             <span style ="background:#475569;color:white;border-radius:8px;
                           padding:4px 10px; font-size:12px;font-weight:600;">5</span>
-            <span style ="font-size:16px;font-weight:600;color:#0c4a6e;">Patient Iniformation</span>
+            <span style ="font-size:16px;font-weight:600;color:#0c4a6e;">Patient Information</span>
         </div>
   </div>
   """,unsafe_allow_html=True)
@@ -243,11 +243,75 @@ if submitted:
   dept_name  = dept_map_inv[pred]
   confidence = proba[pred] * 100
   info       = DEPT_INFO[dept_name]
-  st.markdown(f"""
-  <div style="background:{info['bg']};border:1.6px solid {info['border']};
-              border-radius:16px;padding:28px 32px;">
-      <div style = "font-size:44px">{info['icon']}</div>
-      <div>{dept_name}</div>
-      <div>Confidence: {confidence:.1f}%</div>
+
+  st.markdown("---")
+  st.markdown("""
+  <div style="font-size:22px;font-weight:700;color:#111827;margin-bottom:4px;">AI Recommendation</div>
+  <div style="font-size:14px;color:#6b7280;margin-bottom:1.5rem;">Based on the information you provided</div>
   """,unsafe_allow_html=True)
+
+  res_col, prob_col = st.columns([3,2])
+  with res_col:
+    steps_html = ''.join(
+      f'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'
+      f'<span style="color:{info["color"]};font-size:14px;">📍</span>'
+      f'<span style="font-size:14px;color:#374151;">{step}</span></div>'
+    )
+    st.markdown(f"""
+    <div style="background:{info['bg']};border:1.6px solid {info['border']};
+                border-radius:16px;padding:28px 32px;">
+        <div styl ="font-size:44px">{info['icon']}</div>
+        <div style="font-size:26px;font-weight:600;color{info["color"]};margin-bottom:8px;">{dept_name}</div>
+        <div style="font-size:14px;color:#374151;margin-bottom:20px;">
+            Our AI suggests you visit the <strong>{dept_name}</strong> Department.
+        </div>
+        <div style="font-size:11px;font-weight:600;color:{info["color"]};text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Why?</div>
+        <div style="font-size:14px;color:#4b5563;margin-bottom:20px;">{info["desc"]} your reported symptoms and vitals match patients typically direct to this department.</div>
+        <div style="font-size:11px;font-weight:600;color:{info["color"]};text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">What to do next?</div>
+        {steps_html}
+        <div style="margin-top:20px;padding12px 16px background:rgba(0,0,0,0.05); border-radius:10px;font-size:12px;color:#6b7280;line-height:1.5;">
+        ⚠️This is an AI Suggestion, not a medical diagnosis, Please consult a doctor for further evaluation.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+  with prob_Col:
+    st.markdown(f"""
+    <div style="background:white;border:1px solid #e5e7eb;border-radius:16px;padding:24px;">
+      <div style="font-size:14px;font-weight:600;color:#111827;margin-bottom:16px;">
+        Confidence by department
+      </div>
+    """,unsafe_allow_html=True)
+
+    sorted_depts = sorted(dept_map_inv.items(), key=lambda x: proba[x[0]], reverse=True)
+    bars_html = ""
+    for idx, dname in sorted_depts:
+      pct = proba[idx] * 100
+      dinfo = DEPT_INFO[name]
+      is_top = dname == dept_name
+      bars_html += f"""
+      <div style="margin-bottom:14px;'>
+        <div style="display:flex;justify-contente:space-between;align-items:center;margin-bottom:5px;">
+            <span style="font-size:13px;font-weight{'700' if is_top else '400'};
+                          color:{'#111827' if is_top else '#6b7280'};">
+              {dinfo['icon']} {dname}
+            </span>
+            <span style="font-size:13px;font-weight{'700'if is_top else '400'};
+                          color:{dinfo['color'] if is_top else '#9ca3af'};">
+                {pct:.1f}%
+              </span>
+            </div>
+            <div style="background:#f3f4f6:border-radius:6px;height:8px;overflow:hidden;">
+                <div style="background:{'linear-gradient(90deg, '+dinfo['color']+','+dinfo['border']+')' if is_top else '#e5e7eb'}
+                            height:100%;border-radius:6px;width:{pct}%;transition:width 0.5 ease;"></div>
+            </div>
+      </div>"""
+    st.markdown(bars_html + """
+      <div style="margin-top:20px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;font-size:12px;color#1e40af;">
+          <strong>Model:</strong> KNN(K=7)  · 102,000 patients  · 99.5% accuracy<br>
+          <strong>Powered by:</strong> Future Classroom ML
+      </div>
+    </div>
+    """,unsafe_allow_html=True)
+
   
