@@ -276,7 +276,7 @@ if submitted:
     </div>
     """, unsafe_allow_html=True)
 
-  with prob_Col:
+  with prob_col:
     st.markdown(f"""
     <div style="background:white;border:1px solid #e5e7eb;border-radius:16px;padding:24px;">
       <div style="font-size:14px;font-weight:600;color:#111827;margin-bottom:16px;">
