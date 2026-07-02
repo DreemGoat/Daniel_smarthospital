@@ -167,7 +167,7 @@ with st.form("triage_form"):
             <span style ="font-size:16px;font-weight:600;color:#0c4a6e;">How would you rate the severity?</span>
         </div>
   </div>
-  """,unsafe_allow-html=True)
+  """,unsafe_allow_html=True)
 
   col_temp, col_hr = st.columns(2)
   with col_temp:
@@ -186,7 +186,7 @@ with st.form("triage_form"):
             <span style ="font-size:16px;font-weight:600;color:#0c4a6e;">Do you have any of the following</span>
         </div>
   </div>
-  """,unsafe_allow-html=True)
+  """,unsafe_allow_html=True)
 
   ch1, ch2, ch3 = st.columns(3)
   with ch1: hypertension = st.checkbox("High Blood Pressure")
@@ -203,7 +203,7 @@ with st.form("triage_form"):
             <span style ="font-size:16px;font-weight:600;color:#0c4a6e;">Patient Iniformation</span>
         </div>
   </div>
-  """,unsafe_allow-html=True)
+  """,unsafe_allow_html=True)
   col_age, col_gen = st.columns(2)
   with col_age:
     age = st.number_input("Age", min_value = 1, max_value = 100, value =35)
