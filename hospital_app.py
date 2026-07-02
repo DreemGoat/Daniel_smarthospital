@@ -288,7 +288,7 @@ if submitted:
     bars_html = ""
     for idx, dname in sorted_depts:
       pct = proba[idx] * 100
-      dinfo = DEPT_INFO[name]
+      dinfo = DEPT_INFO[dname]
       is_top = dname == dept_name
       bars_html += f"""
       <div style="margin-bottom:14px;'>
