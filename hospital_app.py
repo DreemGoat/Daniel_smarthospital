@@ -256,6 +256,7 @@ if submitted:
       f'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'
       f'<span style="color:{info["color"]};font-size:14px;">📍</span>'
       f'<span style="font-size:14px;color:#374151;">{step}</span></div>'
+      for step in info['next']
     )
     st.markdown(f"""
     <div style="background:{info['bg']};border:1.6px solid {info['border']};
