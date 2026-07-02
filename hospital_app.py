@@ -172,7 +172,7 @@ with st.form("triage_form"):
   col_temp, col_hr = st.columns(2)
   with col_temp:
     temperature_level = st.selectbox("Temperature", options=list(temp_map.keys()), index=1)
-  with colr_hr:
+  with col_hr:
     heart_rate_level = st.selectbox("Heart Rate", options=list(hr_map.keys()), index=1)
 
   #Section 4 - Medical history 
